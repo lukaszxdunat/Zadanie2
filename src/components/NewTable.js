@@ -11,6 +11,8 @@ export const NewTable = () => {
     const columns = useMemo(()=> COLUMNS, [])
     const data = useMemo(()=> DATA, [])
 
+ {/*     Deklaracja zmiennych */}
+
     const {getTableProps, 
         getTableBodyProps, 
         headerGroups,
@@ -33,15 +35,18 @@ export const NewTable = () => {
     const { globalFilter, pageIndex, pageSize} = state
 
     return (
+    // Generowanie kontynera 
         <Container fluid>
             <Row>
                 <Col>
                 <GlobalFilterComp filter={globalFilter} setFilter={setGlobalFilter}/>
-                    <Table bg-primary striped bordered hover {...getTableProps()}>
+                    <Table striped bordered hover {...getTableProps()}>
+                        {/* Generowanie nagłówka tabeli */}
                         <thead>
                             {headerGroups.map((headerGroup) =>(
-                            <tr {...headerGroup.getHeaderGroupProps()}>
+                            <tr {...headerGroup.getHeaderGroupProps()} >
                                 {headerGroup.headers.map((column)=>(
+                                    // Wyświetlanie nagłówka wraz z możliwością sortowania
                                     <th {...column.getHeaderProps(column.getSortByToggleProps())}>{column.render('Header')}
                                     <span>
                                         {column.isSorted ? (column.isSortedDesc ? '⬆' : '⬇' ) :''}
@@ -51,6 +56,7 @@ export const NewTable = () => {
                             </tr>
                                 ))}
                         </thead>
+                        {/* Generowanie ciała tabeli */}
                         <tbody {...getTableBodyProps()}>
                             {
                                 page.map(row => {
@@ -58,13 +64,17 @@ export const NewTable = () => {
                                     return(
                                         <tr {...row.getRowProps()}>
                                             {row.cells.map((cell)=> {
-                                                return <td{...cell.getCellProps()}>{cell.render('Cell')}</td>
+                                                // Wyświetlanie komórki tabeli
+                                                return  <td{...cell.getCellProps()}>{cell.render('Cell')}</td>
                                             })}
                                         </tr>
                                     )
                                 })
                             }
                         </tbody>
+
+                         {/* Generowanie stopki tabeli */}
+                      
                         <tfoot>
                             {
                                 footerGroups.map(footerGroup=>(
@@ -76,32 +86,36 @@ export const NewTable = () => {
                                 ))
                             }
                         </tfoot>
-
                     </Table>
                  </Col>
             </Row>
 
             <Row>
                 <Col md={{ span: 4, offset: 4 }} className="px-2">
+                            
                                 <span>
-                                    Page{' '}
+                                    Strona{' '}
                                     <strong>
-                                        {pageIndex + 1} of {pageOptions.length} 
+                                        {pageIndex + 1} z {pageOptions.length} 
                                     </strong>
                                 </span>
+                                   {/* Lista umożliwiająca wyswietlanie okreslonej liczby wierszów w tabeli */}
+                                
                                 <select 
                                 value={pageSize} 
                                 onChange={e=> setPageSize(Number(e.target.value))}>
                                     {
                                         [10,20,50,100].map(pageSize => (
                                             <option key={pageSize} value={pageSize}>
-                                                Show {pageSize}
+                                                Pokaż {pageSize}
                                             </option>
                                         ))
                                     }
                                 </select>
-                            <button onClick={() =>previousPage()} disabled={!canPreviousPage}>Previous</button>
-                            <button onClick={() =>nextPage()} disabled={!canNextPage}>Next</button>
+                                 {/* Przyciski do przewijania strony  */}
+                          
+                            <button onClick={() =>previousPage()} disabled={!canPreviousPage}>Poprzednia strona</button>
+                            <button onClick={() =>nextPage()} disabled={!canNextPage}>Następna strona</button>
                 </Col>
              </Row>
         

@@ -1,7 +1,8 @@
+// Wydzielenie nagłówków tabeli
 export const COLUMNS=[
     {
         Header: 'Id',
-        Footer: 'id',
+        Footer: 'Id',
         accessor: 'ident'
     },
     {
@@ -28,6 +29,5 @@ export const COLUMNS=[
         Header: 'Status',
         Footer: 'Status',
         accessor: 'status'
-    }
-    
+    } 
 ]
