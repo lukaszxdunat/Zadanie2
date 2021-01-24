@@ -35,18 +35,20 @@ export const NewTable = () => {
     const { globalFilter, pageIndex, pageSize} = state
 
     return (
-    // Generowanie kontynera 
+    // Generowanie kontynera
         <Container fluid>
             <Row>
                 <Col>
+                {/* Wywołanie funkcji umożliwiającej szukanie */}
                 <GlobalFilterComp filter={globalFilter} setFilter={setGlobalFilter}/>
+                    {/* Generowanie tabeli */}
                     <Table striped bordered hover {...getTableProps()}>
                         {/* Generowanie nagłówka tabeli */}
                         <thead>
                             {headerGroups.map((headerGroup) =>(
                             <tr {...headerGroup.getHeaderGroupProps()} >
                                 {headerGroup.headers.map((column)=>(
-                                    // Wyświetlanie nagłówka wraz z możliwością sortowania
+                                    // Renderowanie nagłówka wraz z możliwością sortowania
                                     <th {...column.getHeaderProps(column.getSortByToggleProps())}>{column.render('Header')}
                                     <span>
                                         {column.isSorted ? (column.isSortedDesc ? '⬆' : '⬇' ) :''}
@@ -64,7 +66,7 @@ export const NewTable = () => {
                                     return(
                                         <tr {...row.getRowProps()}>
                                             {row.cells.map((cell)=> {
-                                                // Wyświetlanie komórki tabeli
+                                                // Renderowanie komórki tabeli
                                                 return  <td{...cell.getCellProps()}>{cell.render('Cell')}</td>
                                             })}
                                         </tr>
@@ -91,8 +93,8 @@ export const NewTable = () => {
             </Row>
 
             <Row>
-                <Col md={{ span: 4, offset: 4 }} className="px-2">
-                            
+                <Col md={{ span: 4, offset: 4 }} className="p-2">
+                             {/*  Wyświetlanie aktualnej strony*/}
                                 <span>
                                     Strona{' '}
                                     <strong>
